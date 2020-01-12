@@ -1,6 +1,7 @@
 package fr.eyzox.ticklinkedlist;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public abstract class AbstractTickContainerLinkedList<T> {
@@ -42,6 +43,19 @@ public abstract class AbstractTickContainerLinkedList<T> {
             }
             this.list.add(tickContainerToAdd);
         }
+    }
+
+    public List<T> clear() {
+        List<T> resultList = new LinkedList<T>();
+        if(!this.list.isEmpty()) {
+            ListIterator<TickContainer<T>> it = this.list.listIterator();
+            while(it.hasNext()) {
+                TickContainer<T> tc = it.next();
+                resultList.add(tc.getData());
+                it.remove();
+            }
+        }
+        return resultList;
     }
 
     protected abstract T merge(T paramT1, T paramT2);
